@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Gerenciador {
     public static void main(String[] args) {
-        String[] equipe = {"Artur", "Camila", "Isabela", "Leonardo", "Lorenzo", "Thiago"};
+        String[] equipe = {"Artur", "Camila", "Isabela", "Leonardo", "Lorenzo", "Thiago", "Não informado"};
         String[] status = {"Pendente","Em andamento","Concluído"};
         Scanner leitor = new Scanner(System.in);
         Boolean menu1 = true;
@@ -64,7 +64,7 @@ public class Gerenciador {
                     | 3. Mudar status da tarefa;                                |
                     | 4. Vizualizar todas as tarefas;                           |
                     | 5. Tempo dos Integrantes;                                 |
-                    | 6. Status de tempo da Sprint;
+                    | 6. Status de tempo da Sprint;                             |
                     |___________________________________________________________|                                                         
                     """);
 
@@ -103,6 +103,7 @@ public class Gerenciador {
                             case 4 -> responsavelLista.add(equipe[3]);
                             case 5 -> responsavelLista.add(equipe[4]);
                             case 6 -> responsavelLista.add(equipe[5]);
+                            default -> responsavelLista.add(equipe[6]);
                         }
 
                         System.out.println("Status:");
@@ -112,6 +113,7 @@ public class Gerenciador {
                             case 1 -> statusLista.add(status[0]);
                             case 2 -> statusLista.add(status[1]);
                             case 3 -> statusLista.add(status[2]);
+                            default -> statusLista.add(status[0]);
                         }
 
                         System.out.println("""
@@ -154,22 +156,26 @@ public class Gerenciador {
                         }
 
                     else if (interacao1.equals(4)){
-                        for (int i = 0; i < nomeLista.size(); i++) {
-                            System.out.println("""
-                                _____________________________________________________
-                                |                   Task %d                         
-                                | Tarefa: %s                                        
-                                | Tamanho: %s                                       
-                                | Tempo: %d hora                                    
-                                | Responsável: %s                                   
-                                | Status: %s                                        
-                                |___________________________________________________
-                                """.formatted(i+1, nomeLista.get(i),
-                                    tamanhoLista.get(i),
-                                    tempoLista.get(i),
-                                    responsavelLista.get(i),
-                                    statusLista.get(i)));
-
+                        if (nomeLista.size() >= 0) {
+                            for (int i = 0; i < nomeLista.size(); i++) {
+                                System.out.println("""
+                                        _____________________________________________________
+                                        |                   Task %d                         
+                                        | Tarefa: %s                                        
+                                        | Tamanho: %s                                       
+                                        | Tempo: %d hora                                    
+                                        | Responsável: %s                                   
+                                        | Status: %s                                        
+                                        |___________________________________________________
+                                        """.formatted(i + 1, nomeLista.get(i),
+                                        tamanhoLista.get(i),
+                                        tempoLista.get(i),
+                                        responsavelLista.get(i),
+                                        statusLista.get(i)));
+                            }
+                        }
+                        else {
+                            System.out.println("Nenhuma tarefa existente!");
                         }
                     }
 
@@ -234,24 +240,31 @@ public class Gerenciador {
                                 | Tempo restante: %d horas.     |
                                 |-------------------------------|
                                 """.formatted(tempoTotal,tempoFeito,tempoFazer));
-                    }}
+                    }
+                while (menu2 == true){
+                    System.out.println("Deseja continuar?(s/n):");
+                    String interacaoContinuar = leitor.nextLine();
+
+
+                    if (interacaoContinuar.equals("n") || interacaoContinuar.equals("não")){
+                        menu1 = false;
+                        menu2 = false;
+                    }else if (interacaoContinuar.equals("s") || interacaoContinuar.equals("sim")){
+                        menu2 = false;
+                        for (int i = 0; i < 20; i++) {
+                            System.out.println();
+                        }
+                    }else {
+                        System.out.println("\nInforme uma resposta válida!\n\n");
+                    }
+                }
+            }
+
 
             else {
-                System.out.println("Coloque um valor válido!");
+                System.out.println("Coloque um valor válido!\n\n\n");
             }
-            while (menu2 == true){
-            System.out.println("Deseja continuar?(s/n):");
-            String interacaoContinuar = leitor.nextLine();
-            interacaoContinuar = leitor.nextLine();
-
-
-            if (interacaoContinuar.equals("n") || interacaoContinuar.equals("não")){
-                menu1 = false;
-                menu2 = false;
-            }else{
-                menu2 = false;
-            }
-                }}
+}
             }
         }
 
