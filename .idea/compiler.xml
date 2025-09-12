@@ -9,6 +9,7 @@
         <module name="PIJava" />
         <module name="Banco" />
         <module name="Artur_Alves_Munhoz_Assis" />
+        <module name="Isabela_Menezes" />
         <module name="Lorenzo-Meni" />
       </profile>
     </annotationProcessing>
